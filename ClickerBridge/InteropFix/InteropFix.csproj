@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Утилита: генерирует BepInEx\interop для игр, собранных из «восстановленного» кода (Il2CppDumper),
+    где стандартная генерация BepInEx падает с "Sequence contains more than one matching element".
+    Запуск:  dotnet run -c Release (аргументы: "путь\к\папке\игры" 2021.3.6f1)
+  -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <RollForward>Major</RollForward>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <GameDir Condition="'$(GameDir)' == ''">C:\NotYours\My Games\1.2.8.2505.06</GameDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="$(GameDir)\BepInEx\core\*.dll" Exclude="$(GameDir)\BepInEx\core\dobby.dll" Private="true" />
+    <Reference Include="$(GameDir)\dotnet\Microsoft.Extensions.Logging.Abstractions.dll" Private="true" />
+  </ItemGroup>
+
+</Project>
